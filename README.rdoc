@@ -1,0 +1,42 @@
+= EnumCSV
+
+EnumCSV exposes a single method, csv, for easily creating CSV
+output/files from enumerable objects.  It is a super simple wrapper
+class for ruby's csv library.
+
+= Installation
+
+  sudo gem install enum_csv
+
+= Source Code
+
+Source code is available on GitHub at https://github.com/jeremyevans/enum_csv
+
+= Examples
+
+The default behavior just expects an enumerable of arrays (such as an array of
+arrays), and returns a string containing the CSV output:
+
+  EnumCSV.csv([[1, 2]]) => "1,2\n"
+
+You can use the :headers option to set custom headers:
+
+  EnumCSV.csv([[1, 2], [3,"4,5"]], :headers=>['A', 'B']) => "A,B\n1,2\n3,\"4,5\"\n"
+
+The :file option can be used to output to a file:
+
+  EnumCSV.csv([[1, 2]], :file=>'foo.csv') => nil # output written to foo.csv
+
+If a block is passed to the method, all items in the enumerable are yielded to
+the block, and the block should return an array with the data to use in the CSV
+output:
+
+  EnumCSV.csv([{:a=>1, :b=>2}, {:a=>3, b=>4}]){|line| [l[:b], l[:a] + 10]} => "2,11\n4,13\n"
+
+= License
+
+MIT
+
+= Author
+
+Jeremy Evans <code@jeremyevans.net>
