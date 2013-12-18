@@ -33,6 +33,10 @@ output:
 
   EnumCSV.csv([{:a=>1, :b=>2}, {:a=>3, b=>4}]){|line| [l[:b], l[:a] + 10]} => "2,11\n4,13\n"
 
+= Ruby 1.8 Usage
+
+On Ruby 1.8, you need to install the fastercsv gem to use this library.
+
 = License
 
 MIT
