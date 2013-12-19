@@ -36,7 +36,7 @@ begin
   spec.call("spec", Dir["spec/*_spec.rb"], "Run specs")
 rescue LoadError
   task :default do
-    puts "Must install rspec >=2.0 to run the default task (which runs specs)"
+    puts "Must install rspec to run the default task (which runs specs)"
   end
 end
 
