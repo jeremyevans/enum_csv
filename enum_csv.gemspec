@@ -9,7 +9,7 @@ spec = Gem::Specification.new do |s|
   s.summary = "Create CSV from Enumerables"
   s.author = "Jeremy Evans"
   s.email = "code@jeremyevans.net"
-  s.homepage = "http://gihub.com/jeremyevans/enum_csv"
+  s.homepage = "http://github.com/jeremyevans/enum_csv"
   s.files = %w(MIT-LICENSE CHANGELOG README.rdoc Rakefile) + Dir["{spec,lib}/**/*.rb"]
   s.description = <<END
 EnumCSV exposes a single method, csv, for easily creating CSV
