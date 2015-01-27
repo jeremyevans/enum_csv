@@ -1,3 +1,4 @@
+require 'rubygems'
 require File.join(File.dirname(File.expand_path(__FILE__)), '../lib/enum_csv')
 
 describe "EnumCSV.csv" do
