@@ -21,6 +21,11 @@ describe "EnumCSV.csv" do
     EnumCSV.csv([[1, nil], [3, 4]], :headers=>['a', nil]).should == "a,\n1,\n3,4\n"
   end
 
+  it "should support :headers option as a comma delimited string" do
+    EnumCSV.csv([[1, 2]], :headers=>'a,b').should == "a,b\n1,2\n"
+    EnumCSV.csv([[1, 2], [3, 4]], :headers=>'a,b').should == "a,b\n1,2\n3,4\n"
+  end
+
   it "should support :file option for writing to a file" do
     EnumCSV.csv([[1, 2]], :file=>TEST_FILE).should be_nil
     File.read(TEST_FILE).should == "1,2\n"

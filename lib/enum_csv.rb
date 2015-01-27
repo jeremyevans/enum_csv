@@ -15,13 +15,16 @@ module EnumCSV
   #
   # Options:
   # :headers :: Should be an array of headers to use as the first
-  #             line of the CSV output.
+  #             line of the CSV output, or a comma-delimited string
+  #             of headers.
   # :file :: Output to the given file and return nil instead of
   #          returning a string with the CSV output.
   # all other options :: Passed to CSV.open or CSV.generate
   def csv(enum, opts={})
-    if opts[:headers].is_a?(Array) && !opts.has_key?(:write_headers)
-      opts = opts.merge(:write_headers=>true)
+    headers = opts[:headers]
+    headers = headers.split(',') if headers.is_a?(String)
+    if headers.is_a?(Array) && !opts.has_key?(:write_headers)
+      opts = opts.merge(:write_headers=>true, :headers=>headers)
     end
 
     csv_proc = proc do |csv|

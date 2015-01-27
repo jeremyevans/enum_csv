@@ -22,6 +22,7 @@ arrays), and returns a string containing the CSV output:
 You can use the :headers option to set custom headers:
 
   EnumCSV.csv([[1, 2], [3,"4,5"]], :headers=>['A', 'B']) => "A,B\n1,2\n3,\"4,5\"\n"
+  EnumCSV.csv([[1, 2], [3,"4,5"]], :headers=>'A,B') => "A,B\n1,2\n3,\"4,5\"\n"
 
 The :file option can be used to output to a file:
 

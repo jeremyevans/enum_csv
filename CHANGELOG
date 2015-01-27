@@ -1,3 +1,9 @@
+=== 1.1.0 (2015-01-27)
+
+* Support a comma-delimited string for the :headers option (jeremyevans)
+
+* Fix homepage in gemspec (jeremyevans)
+
 === 1.0.0 (2013-12-18)
 
 * Initial Public Release
