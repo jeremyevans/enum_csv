@@ -1,6 +1,17 @@
 require 'rubygems'
 require File.join(File.dirname(File.expand_path(__FILE__)), '../lib/enum_csv')
 
+if defined?(RSpec)
+  require 'rspec/version'
+  if RSpec::Version::STRING >= '2.11.0'
+    RSpec.configure do |config|
+      config.expect_with :rspec do |c|
+        c.syntax = :should
+      end
+    end
+  end
+end
+
 describe "EnumCSV.csv" do
   TEST_FILE = File.join(File.dirname(File.expand_path(__FILE__)), 'test.csv')
   after(:all) do
