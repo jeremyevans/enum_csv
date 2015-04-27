@@ -6,7 +6,7 @@ class for ruby's csv library.
 
 = Installation
 
-  sudo gem install enum_csv
+  gem install enum_csv
 
 = Source Code
 
