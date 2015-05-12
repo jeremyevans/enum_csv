@@ -1,6 +1,5 @@
 require "rake"
 require "rake/clean"
-require 'rake/testtask'
 
 CLEAN.include ["enum_csv-*.gem", "rdoc", "coverage"]
 
@@ -12,13 +11,12 @@ end
 ### Specs
 
 desc "Run specs"
-Rake::TestTask.new do |t|
-  t.libs.push "lib"
-  t.test_files = FileList['spec/*_spec.rb']
-  t.verbose = true
+task "spec" do
+  sh "#{FileUtils::RUBY} -rubygems -I lib spec/enum_csv_spec.rb"
 end
 
-task :default=>:test
+task :default=>:spec
+
 ### RDoc
 
 RDOC_DEFAULT_OPTS = ["--quiet", "--line-numbers", "--inline-source", '--title', 'EnumCSV: Create CSV from Enumerables']
