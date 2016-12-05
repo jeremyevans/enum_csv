@@ -29,7 +29,7 @@ describe "EnumCSV.csv" do
   end
 
   it "should support :file option for writing to a file" do
-    EnumCSV.csv([[1, 2]], :file=>TEST_FILE).must_equal nil
+    EnumCSV.csv([[1, 2]], :file=>TEST_FILE).must_be_nil
     File.read(TEST_FILE).must_equal "1,2\n"
     EnumCSV.csv([[1, 2]], :file=>TEST_FILE, :headers=>['a', 'b'])
     File.read(TEST_FILE).must_equal "a,b\n1,2\n"
