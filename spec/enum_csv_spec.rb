@@ -1,5 +1,6 @@
 require 'rubygems'
 require File.join(File.dirname(File.expand_path(__FILE__)), '../lib/enum_csv')
+ENV['MT_NO_PLUGINS'] = '1' # Work around stupid autoloading of plugins
 require 'minitest/autorun'
 require 'minitest/spec'
 
