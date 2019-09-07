@@ -1,3 +1,7 @@
+=== master
+
+* Avoid keyword argument separation warnings on Ruby master (jeremyevans)
+
 === 1.1.0 (2015-01-27)
 
 * Support a comma-delimited string for the :headers option (jeremyevans)

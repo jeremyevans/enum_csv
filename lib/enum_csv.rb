@@ -9,6 +9,18 @@ module EnumCSV
     CSV = ::FasterCSV
   end
 
+  if RUBY_VERSION >= "2.0"
+    instance_eval(<<-END, __FILE__, __LINE__+1)
+      def self.csv_call(*args, opts, &block)
+        CSV.send(*args, **opts, &block)
+      end
+    END
+  else
+    def self.csv_call(*args, opts, &block)
+      CSV.send(*args, opts, &block)
+    end
+  end
+
   # Create CSV from the given Enumerable object. If a block is given,
   # each item in the enumerable is yielded to the block, and the block
   # should return an array of of items to use for the CSV line.
@@ -37,10 +49,10 @@ module EnumCSV
     if opts[:file]
       opts = opts.dup
       file = opts.delete(:file)
-      CSV.open(file, 'wb', opts, &csv_proc)
+      EnumCSV.csv_call(:open, file, 'wb', opts, &csv_proc)
       nil
     else
-      CSV.generate(opts, &csv_proc)
+      EnumCSV.csv_call(:generate, opts, &csv_proc)
     end
   end
   module_function :csv
