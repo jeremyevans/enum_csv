@@ -14,4 +14,5 @@ spec = Gem::Specification.new do |s|
 EnumCSV exposes a single method, csv, for easily creating CSV
 output/files from enumerable objects.
 END
+  s.add_development_dependency "minitest-global_expectations"
 end
