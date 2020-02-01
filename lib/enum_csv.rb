@@ -16,8 +16,8 @@ module EnumCSV
       end
     END
   else
-    def self.csv_call(*args, opts, &block)
-      CSV.send(*args, opts, &block)
+    def self.csv_call(*args, &block)
+      CSV.send(*args, &block)
     end
   end
 
