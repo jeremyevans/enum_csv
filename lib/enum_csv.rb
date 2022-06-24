@@ -1,26 +1,10 @@
+# frozen-string-literal: true
+
+require 'csv'
+
 # EnumCSV exposes a single method, csv, for easily creating CSV
 # output/files from enumerable objects.
 module EnumCSV
-  if RUBY_VERSION >= '1.9'
-    require 'csv'
-  else
-    require 'fastercsv'
-    # Use FasterCSV on ruby 1.8
-    CSV = ::FasterCSV
-  end
-
-  if RUBY_VERSION >= "2.0"
-    instance_eval(<<-END, __FILE__, __LINE__+1)
-      def self.csv_call(*args, opts, &block)
-        CSV.send(*args, **opts, &block)
-      end
-    END
-  else
-    def self.csv_call(*args, &block)
-      CSV.send(*args, &block)
-    end
-  end
-
   # Create CSV from the given Enumerable object. If a block is given,
   # each item in the enumerable is yielded to the block, and the block
   # should return an array of of items to use for the CSV line.
@@ -35,8 +19,17 @@ module EnumCSV
   def csv(enum, opts={})
     headers = opts[:headers]
     headers = headers.split(',') if headers.is_a?(String)
-    if headers.is_a?(Array) && !opts.has_key?(:write_headers)
-      opts = opts.merge(:write_headers=>true, :headers=>headers)
+    has_headers = headers.is_a?(Array) && !opts.has_key?(:write_headers)
+    has_file = opts[:file]
+
+    if has_headers || has_file
+      opts = opts.dup
+      file = opts.delete(:file)
+
+      if has_headers
+        opts[:write_headers] = true
+        opts[:headers] = headers
+      end
     end
 
     csv_proc = proc do |csv|
@@ -46,13 +39,11 @@ module EnumCSV
       end
     end
 
-    if opts[:file]
-      opts = opts.dup
-      file = opts.delete(:file)
-      EnumCSV.csv_call(:open, file, 'wb', opts, &csv_proc)
+    if file
+      CSV.open(file, 'wb', **opts, &csv_proc)
       nil
     else
-      EnumCSV.csv_call(:generate, opts, &csv_proc)
+      CSV.generate(**opts, &csv_proc)
     end
   end
   module_function :csv
