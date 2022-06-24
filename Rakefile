@@ -11,10 +11,16 @@ end
 
 desc "Run specs"
 task "spec" do
-  sh "#{FileUtils::RUBY} #{'-w' if RUBY_VERSION >= '3'} -I lib spec/enum_csv_spec.rb"
+  sh "#{FileUtils::RUBY} #{'-w' if RUBY_VERSION >= '3'} spec/enum_csv_spec.rb"
 end
 
 task :default=>:spec
+
+desc "Run specs with coverage"
+task :spec_cov do
+  ENV['COVERAGE'] = '1'
+  sh "#{FileUtils::RUBY} spec/enum_csv_spec.rb"
+end
 
 ### RDoc
 
