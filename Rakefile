@@ -1,4 +1,3 @@
-require "rake"
 require "rake/clean"
 
 CLEAN.include ["enum_csv-*.gem", "rdoc", "coverage"]
@@ -19,27 +18,17 @@ task :default=>:spec
 
 ### RDoc
 
-RDOC_DEFAULT_OPTS = ["--quiet", "--line-numbers", "--inline-source", '--title', 'EnumCSV: Create CSV from Enumerables']
+require "rdoc/task"
 
-begin
-  gem 'hanna-nouveau'
-  RDOC_DEFAULT_OPTS.concat(['-f', 'hanna'])
-rescue Gem::LoadError
-end
-
-rdoc_task_class = begin
-  require "rdoc/task"
-  RDoc::Task
-rescue LoadError
-  require "rake/rdoctask"
-  Rake::RDocTask
-end
-
-RDOC_OPTS = RDOC_DEFAULT_OPTS + ['--main', 'README.rdoc']
-
-rdoc_task_class.new do |rdoc|
+RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = "rdoc"
-  rdoc.options += RDOC_OPTS
+  rdoc.options += ["--quiet", "--line-numbers", "--inline-source", '--title', 'EnumCSV: Create CSV from Enumerables', '--main', 'README.rdoc']
+
+  begin
+    gem 'hanna-nouveau'
+    rdoc.options += ['-f', 'hanna']
+  rescue Gem::LoadError
+  end
+
   rdoc.rdoc_files.add %w"README.rdoc CHANGELOG MIT-LICENSE lib/**/*.rb"
 end
-
