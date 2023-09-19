@@ -19,7 +19,8 @@ spec = Gem::Specification.new do |s|
 EnumCSV exposes a single method, csv, for easily creating CSV
 output/files from enumerable objects.
 END
-  s.required_ruby_version = ">= 2.0"
+  s.required_ruby_version = ">= 2.3"
+  s.add_dependency "csv"
   s.add_development_dependency "minitest"
   s.add_development_dependency "minitest-global_expectations"
 end
