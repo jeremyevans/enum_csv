@@ -1,3 +1,9 @@
+=== 1.2.0 (2023-09-19)
+
+* Set required_ruby_version to 2.3+, as no version of the csv gem supports Ruby <2.3 (jeremyevans)
+
+* Add dependency on csv, as csv is moving from standard library to bundled gem in Ruby 3.4 (jeremyevans)
+
 === 1.1.1 (2020-01-31)
 
 * Drop shipping of tests in gem (jeremyevans)
